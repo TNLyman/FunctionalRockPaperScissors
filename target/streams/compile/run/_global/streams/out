@@ -1,0 +1,33 @@
+[0m[[0m[31merror[0m] [0m[0mjava.util.NoSuchElementException: key not found: randomSeed[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.collection.immutable.Map$Map3.apply(Map.scala:399)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.unpackNumber(ParsingSeason.scala:69)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.$anonfun$betterUnpackUsingFlatMap$2(ParsingSeason.scala:54)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.$anonfun$betterUnpackUsingFlatMap$2$adapted(ParsingSeason.scala:54)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.util.Either.flatMap(Either.scala:352)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.$anonfun$betterUnpackUsingFlatMap$1(ParsingSeason.scala:54)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.$anonfun$betterUnpackUsingFlatMap$1$adapted(ParsingSeason.scala:53)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.util.Either.flatMap(Either.scala:352)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.betterUnpackUsingFlatMap(ParsingSeason.scala:53)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.$anonfun$go$1(ParsingSeason.scala:28)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.util.Either.flatMap(Either.scala:352)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ParsingSeason$.go(ParsingSeason.scala:28)[0m
+[0m[[0m[31merror[0m] [0m[0m	at TraditionalMain$.main(TraditionalMain.scala:14)[0m
+[0m[[0m[31merror[0m] [0m[0m	at TraditionalMain.main(TraditionalMain.scala)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.lang.reflect.Method.invoke(Unknown Source)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.Run.invokeMain(Run.scala:143)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.Run.execute$1(Run.scala:93)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.Run.$anonfun$runWithLoader$5(Run.scala:120)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.Run$.executeSuccess(Run.scala:186)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.Run.runWithLoader(Run.scala:120)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.Defaults$.$anonfun$bgRunTask$6(Defaults.scala:1981)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.Defaults$.$anonfun$termWrapper$2(Defaults.scala:1920)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)[0m
+[0m[[0m[31merror[0m] [0m[0m	at scala.util.Try$.apply(Try.scala:213)[0m
+[0m[[0m[31merror[0m] [0m[0m	at sbt.internal.BackgroundThreadPool$BackgroundRunnable.run(DefaultBackgroundJobService.scala:369)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.lang.Thread.run(Unknown Source)[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) java.util.NoSuchElementException: key not found: randomSeed[0m

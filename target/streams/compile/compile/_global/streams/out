@@ -1,4 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0mC:\Users\tlyma\Documents\GitHub\FunctionalRockPaperScissors\src\main\scala\please_refactor\rockpaperscissors\RockPaperScissorsJSONCmdGame.scala:11:5: not found: value ParsingSeason[0m
-[0m[[0m[31merror[0m] [0m[0m    ParsingSeason.go[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\tlyma\Documents\GitHub\FunctionalRockPaperScissors\src\main\scala\please_refactor\rockpaperscissors\ParsingSeason.scala:39:20: identifier expected but '.' found.[0m
+[0m[[0m[31merror[0m] [0m[0m      tournaments: .toInt(Double),[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\tlyma\Documents\GitHub\FunctionalRockPaperScissors\src\main\scala\please_refactor\rockpaperscissors\ParsingSeason.scala:94:1: ')' expected but '}' found.[0m
+[0m[[0m[31merror[0m] [0m[0m}[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

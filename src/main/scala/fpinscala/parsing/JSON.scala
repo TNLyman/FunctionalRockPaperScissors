@@ -8,7 +8,8 @@ trait JSON
 object JSON {
   case object JNull extends JSON
   // Doubles not used in project, so replaced with Int.
-  case class JNumber(get: Int) extends JSON
+  //case class JNumber(get: Int) extends JSON
+  case class JNumber(get: Double) extends JSON
   case class JString(get: String) extends JSON
   case class JBool(get: Boolean) extends JSON
   case class JArray(get: IndexedSeq[JSON]) extends JSON
@@ -46,6 +47,7 @@ object JSONExample extends App {
 {
   "tournaments" : 3,
   "roundsPerMatch"  : 7,
+  "randomSeed" : 12345,
   "Related companies" : [ "Losing 1", "Losing 2", "Winning 1", "Random 1", "Last Winning 1" ]
 }
 """

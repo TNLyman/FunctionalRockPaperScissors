@@ -3,18 +3,23 @@ import fpinscala.parsing.{JSON, Location, ParseError}
 
 import scala.::
 import scala.collection.IterableOnce.iterableOnceExtensionMethods
+import scala.io.StdIn.readLine
 
 object ParsingSeason {
   // Outermost object having inside: String, String, Boolean, Number, Number, List of Strings in which order doesn't matter.
   // Testing value. Theoretically could be replaced with a direct call to the JSON config file. 
-  val jsonTxt =
+  // So, how would we make that call?
+  val jsonTxt = //"tournamentConfig.json"
+    
     """
 {
   "tournaments" : 3,
   "roundsPerMatch"  : 7,
+  "randomSeed" : 12345,
   "players" : [ "Losing 1", "Losing 2", "Winning 1", "Random 1", "Last Winning 1" ]
 }
 """
+
 
   def go = {
     // fpinscala is stuff from book. This takes their parsing, reference.
@@ -22,14 +27,19 @@ object ParsingSeason {
     import fpinscala.parsing.ReferenceTypes.Parser
     val json: Parser[JSON] = JSON.jsonParser(P)
     val resultOfParsing = P.run(json)(jsonTxt) // this parses JSON input into a JSON object
-    // Going with flatMap since it was reviewed in class..
+    // Going with flatMap since it was reviewed in class.
+    // Instead of println, should this be a return statement?
+    // If so, that should mean this will handle the parsing.
     resultOfParsing.flatMap(j => betterUnpackUsingFlatMap(j)).map(dto => println(dto)).map(_ => ())
+    // resultOfParsing.flatMap(j => betterUnpackUsingFlatMap(j)).map(dto => return(dto)).map(_ => ())
   }
 
   // Starting with one level, which matches original parsing demo's depth and use of a list of strings.
+  // Can possibly convert Doubles to Ints when initializing?
   case class SeasonDTO(
-      tournaments: Int,
-      roundsPerMatch: Int,
+      tournaments: Double,
+      roundsPerMatch: Double,
+      randomSeed: Double,
       players: List[String])
 
   def unpackList(c: List[JSON], r: Either[ParseError,List[String]]): Either[ParseError,List[String]] =
@@ -47,8 +57,9 @@ object ParsingSeason {
       case jObject: JObject =>
         unpackNumber(jObject, "tournaments")
           .flatMap(tournaments => unpackNumber(jObject, "roundsPerMatch")
-          .flatMap(roundsPerMatch => unpackArray(jObject, "players")
-          .map(players => SeasonDTO(tournaments, roundsPerMatch, players))))
+          .flatMap(roundsPerMatch => unpackNumber(jObject, "randomSeed")
+          .flatMap(randomSeed => unpackArray(jObject, "players")
+          .map(players => SeasonDTO(tournaments, roundsPerMatch, randomSeed, players)))))
       case _ => Left(ParseError(List((Location("Could not unpack JSON contents"), "Could not unpack JSON contents"))))
     }
   }
@@ -60,10 +71,16 @@ object ParsingSeason {
 
   //No boolean values in DTO, so I've removed it.
 
-  // No Doubles in DTO, just Ints.
+  /*
   def unpackNumber(jObject: JObject, key: String): Either[ParseError, Int] = jObject.get(key) match {
     case jNumber: JNumber => Right(jNumber.get)
     case _ => Left(ParseError(List((Location("Could not unpack ticker"), "ticker"))))
+  }
+  */
+
+  def unpackNumber(jObject: JObject, key: String): Either[ParseError, Double] = jObject.get(key) match {
+    case jNumber: JNumber => Right(jNumber.get)
+    case _ => Left(ParseError(List((Location("Could not unpack weights"), "weights"))))
   }
 
   def unpackArray(jObject: JObject, key: String): Either[ParseError, List[String]] = {

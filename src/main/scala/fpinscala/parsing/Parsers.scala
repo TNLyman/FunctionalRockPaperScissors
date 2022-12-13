@@ -100,11 +100,17 @@ trait Parsers[Parser[+_]] { self => // so inner classes may call methods of trai
   /** C/Java style floating point literals, e.g .1, -1.0, 1e9, 1E-23, etc.
     * Result is left as a string to keep full precision
     */
-  // Double names changed to Int.
-  def intString: Parser[String] =
+  def doubleString: Parser[String] =
     token("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?".r)
 
   /** Floating point literals, converted to a `Double`. */
+  def double: Parser[Double] =
+    doubleString map (_.toDouble) label "double literal"
+
+  def intString: Parser[String] =
+    token("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?".r)
+
+  /** Floating point literals, converted to an `Int`. */
   def int: Parser[Int] =
     intString map (_.toInt) label "int literal"
 
