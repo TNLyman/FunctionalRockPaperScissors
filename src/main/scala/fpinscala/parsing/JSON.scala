@@ -7,7 +7,8 @@ trait JSON
 
 object JSON {
   case object JNull extends JSON
-  case class JNumber(get: Double) extends JSON
+  // Doubles not used in project, so replaced with Int.
+  case class JNumber(get: Int) extends JSON
   case class JString(get: String) extends JSON
   case class JBool(get: Boolean) extends JSON
   case class JArray(get: IndexedSeq[JSON]) extends JSON
@@ -26,7 +27,7 @@ object JSON {
     def keyval = escapedQuoted ** (":" *> value)
     def lit = scope("literal") {
       "null".as(JNull) |
-      double.map(JNumber(_)) |
+      int.map(JNumber(_)) |
       escapedQuoted.map(JString(_)) |
       "true".as(JBool(true)) |
       "false".as(JBool(false))
@@ -37,32 +38,29 @@ object JSON {
 }
 
 /**
- * JSON parsing example.
+ * JSON parsing example. Changed to RPS values.
  */
 object JSONExample extends App {
 
   val jsonTxt = """
 {
-  "Company name" : "Microsoft Corporation",
-  "Ticker"  : "MSFT",
-  "Active"  : true,
-  "Price"   : 30.66,
-  "Shares outstanding" : 8.38e9,
-  "Related companies" : [ "HPQ", "IBM", "YHOO", "DELL", "GOOG" ]
+  "tournaments" : 3,
+  "roundsPerMatch"  : 7,
+  "Related companies" : [ "Losing 1", "Losing 2", "Winning 1", "Random 1", "Last Winning 1" ]
 }
 """
 
   val malformedJson1 = """
 {
-  "Company name" ; "Microsoft Corporation"
+  "tournaments" ; 3
 }
 """
 
   val malformedJson2 = """
 [
-  [ "HPQ", "IBM",
-  "YHOO", "DELL" ++
-  "GOOG"
+  [ "Losing 1", "Losing 2",
+  "Winning 1", "Random 1" ++
+  "Last Winning 1"
   ]
 ]
 """
@@ -80,5 +78,3 @@ object JSONExample extends App {
   println("--")
   printResult { P.run(json)(malformedJson2) }
 }
-
-
