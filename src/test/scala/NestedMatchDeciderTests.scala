@@ -1,4 +1,4 @@
-import please_refactor.rockpaperscissors.NestedMatchDecider.beats
+import timothy_lyman.rockpaperscissors.NestedMatchDecider.beats
 
 class NestedMatchDeciderTests extends MatchDeciderTests {
   "NestedMatchDecider" should "judge rock-paper-scissors moves correctly with valid inputs" in {

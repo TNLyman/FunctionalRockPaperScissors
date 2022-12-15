@@ -1,4 +1,4 @@
-import please_refactor.rockpaperscissors.SingleMatchDecider.beats
+import timothy_lyman.rockpaperscissors.SingleMatchDecider.beats
 
 class SingleMatchDeciderTests extends MatchDeciderTests {
   "SingleMatchDecider" should "judge rock-paper-scissors moves correctly with valid inputs" in {
