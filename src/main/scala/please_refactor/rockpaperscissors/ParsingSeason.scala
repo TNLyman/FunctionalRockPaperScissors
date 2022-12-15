@@ -15,7 +15,6 @@ object ParsingSeason {
 {
   "tournaments" : 3,
   "roundsPerMatch"  : 7,
-  "randomSeed" : 12345,
   "players" : [ "Losing 1", "Losing 2", "Winning 1", "Random 1", "Last Winning 1" ]
 }
 """
@@ -39,7 +38,6 @@ object ParsingSeason {
   case class SeasonDTO(
       tournaments: Double,
       roundsPerMatch: Double,
-      randomSeed: Double,
       players: List[String])
 
   def unpackList(c: List[JSON], r: Either[ParseError,List[String]]): Either[ParseError,List[String]] =
@@ -57,9 +55,8 @@ object ParsingSeason {
       case jObject: JObject =>
         unpackNumber(jObject, "tournaments")
           .flatMap(tournaments => unpackNumber(jObject, "roundsPerMatch")
-          .flatMap(roundsPerMatch => unpackNumber(jObject, "randomSeed")
-          .flatMap(randomSeed => unpackArray(jObject, "players")
-          .map(players => SeasonDTO(tournaments, roundsPerMatch, randomSeed, players)))))
+          .flatMap(roundsPerMatch => unpackArray(jObject, "players")
+          .map(players => SeasonDTO(tournaments, roundsPerMatch, players))))
       case _ => Left(ParseError(List((Location("Could not unpack JSON contents"), "Could not unpack JSON contents"))))
     }
   }
