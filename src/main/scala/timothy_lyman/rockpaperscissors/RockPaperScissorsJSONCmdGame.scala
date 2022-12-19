@@ -38,6 +38,7 @@ object ParsingSeason {
     // resultOfParsing.flatMap(j => betterUnpackUsingFlatMap(j)).map(dto => return(dto)).map(_ => ())
     }
 
+
   // Starting with one level, which matches original parsing demo's depth and use of a list of strings.
   // Can possibly convert Doubles to Ints when initializing?
   case class SeasonDTO(
@@ -98,27 +99,57 @@ object ParsingSeason {
 
 object RockPaperScissorsJSONCmdGame {
   def main(args: Array[String]): Unit = {
-    // Test ParsingSeason here. If it starts working, will probably move to 
-    // handleTournamentSeason and the only code here will be the function call.
-    println("ParsingSeason results")
-    ParsingSeason.go
-
-    // handleTournamentSeason
+    handleTournamentSeason
   }
 
   // Local Code contributions start here.
   private def handleTournamentSeason = {
-    // Change to JSON parsed data for number of tournaments run. Still gets numRounds.
-    // val tournaments
-
-    // Change to JSON parsed data as input for initialization.
-    // val numRounds
-
-    // Change to JSON parsed data as input for initialization.
-    // val randomSeed
 
     // Change to JSON parsed data as input for initializations.
-    // val players
+    val weights1 = Map[RPSMove, Double](Rock -> 0.75, Paper -> 0.13, Scissors -> 0.12)
+    val weights2 = Map[RPSMove, Double](Rock -> 0.1, Paper -> 0.8, Scissors -> 0.1)
+    val weights3 = Map[RPSMove, Double](Rock -> 0.05, Paper -> 0.05, Scissors -> 0.9)
+    val weights4 = Map[RPSMove, Double](Rock -> 0.6, Paper -> 0.2, Scissors -> 0.2)
+    val weights5 = Map[RPSMove, Double](Rock -> 0.5, Paper -> 0.25, Scissors -> 0.25)
+
+    // Change to JSON parsed data as input for initializations.
+
+    // println("ParsingSeason results")
+    /* val seasonValues = ParsingSeason.go */
+
+    // Change to JSON parsed data as input for initialization.
+    /* val numRounds = seasonValues.roundsPerMatch */
+    val numRounds = 3
+
+    // Change to JSON parsed data for number of tournaments run. Still gets numRounds.
+    /* 
+    // val tournaments
+    // for(_ <- seasonValues.tournaments) {
+    //  tournaments.toList(numRounds)
+    // } 
+    */
+      val tournaments = List(
+      new IndividualMatchRoundRobinTournament(numRounds),
+      new IndividualMatchRoundRobinTournament(numRounds),
+      new IndividualMatchRoundRobinTournament(numRounds),
+      new IndividualMatchRoundRobinTournament(numRounds)
+    )
+
+    // Change to JSON parsed data as input for initializations.
+    /* val players = seasonValues.players */
+      val players = List(
+      new LastLosingMovePlayer("Last Losing Move Player"),
+      new BiasedRandomMovePlayer(s"Biased Random Move Player: ${weights1}", weights1),
+      new LastWinningMovePlayer("Last Winning Move Player"),
+      new RandomMovePlayer("Random Move Player 1"),
+      new BiasedRandomMovePlayer(s"Biased Random Move Player: ${weights2}", weights2),
+      new MajorityWinningMovePlayer("Majority Winning Move Player"),
+      new BiasedRandomMovePlayer(s"Biased Random Move Player: ${weights3}", weights3),
+      new MajorityLosingMovePlayer("Majority Losing Move Player"),
+      new BiasedRandomMovePlayer(s"Biased Random Move Player: ${weights4}", weights4),
+      new RandomMovePlayer("Random Move Player 1"),
+      new BiasedRandomMovePlayer(s"Biased Random Move Player: ${weights5}", weights5),
+    )
 
       // Change to JSON parsed data as input for initializations.
       // val name
@@ -130,7 +161,6 @@ object RockPaperScissorsJSONCmdGame {
       // val weights
 
     // Stop here. Goal of above is to get list of respective players and tournaments passed to function below.
-    /*
     val seasonResults =
       MixedTournamentSeason.handleTournamentSeason(players)(tournaments).toList.sortWith((firstPlayer, secondPlayer) => firstPlayer._2 > secondPlayer._2)
     println(s"Summary of tournament season:\n${seasonResults}")
@@ -155,6 +185,5 @@ object RockPaperScissorsJSONCmdGame {
     println ("===============")
     for (r <- handle3)
       println(s"Player: ${r._1.playerInfo}   Points: ${r._2}")
-    */
   }
 }
